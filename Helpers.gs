@@ -228,16 +228,9 @@ function filterResults(events){
           }
         }
         else{
-          switch (filter.comparison){
-            case "equals":
-              return ((filter.criterias.includes(event.getFirstPropertyValue(filter.parameter).toString())) ^ (filter.type == "exclude"));
-            case "contains":
-              return ((filter.criterias.some(function(f){return event.getFirstPropertyValue(filter.parameter).toString().includes(f);})) ^ (filter.type == "exclude"));
-            case "begins with":
-              return ((filter.criterias.some(function(f){return event.getFirstPropertyValue(filter.parameter).toString().startsWith(f);})) ^ (filter.type == "exclude"));
-            case "default":
-              return true;
-          }
+          let regexString = `${(["equals", "begins with"].includes(filter.comparison)) ? "^" : ""}(${filter.criterias.join("|")})${(filter.comparison == "equals") ? "$" : ""}`;
+          let regex = new RegExp(regexString);
+          return (regex.test(event.getFirstPropertyValue(filter.parameter).toString()) ^ (filter.type == "exclude"));
         } 
       }
       catch(e){return (filter.type == "exclude");}

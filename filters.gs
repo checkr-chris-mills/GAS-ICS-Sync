@@ -2,13 +2,13 @@ var filters = [
             /*{ 
               parameter: "summary",
               type: "exclude", //include/exclude
-              comparison: "equals", // equals, begins with, contains
-              criterias: ["Pending:"]
+              comparison: "regex", // equals, begins with, contains, regex
+              criterias: ["^Pending:", "cancelled"]
             },
             {
               parameter: "categories",
               type: "include", //include/exclude
-              comparison: "equals", // equals, begins with, contains
+              comparison: "equals", // equals, begins with, contains, regex
               criterias: ["Meetings"]
             },
             {
@@ -20,7 +20,7 @@ var filters = [
             {
               parameter: "dtstart",
               type: "exclude", //include/exclude
-              comparison: ">", // equals, begins with, contains, <,>, =
+              comparison: ">", // <,>, =
               offset: 14
             } */
           ];
